@@ -30,11 +30,17 @@ body {
     column-gap: 10px;
 }
 
-.github_logo{
+.git-hub-link{
     height: 45px;
+    width: 50px;
 }
 
-.search_icon {
+.github_logo{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+#form_submit_icon {
     width: 20px;
     height: 20px;
     position: absolute;

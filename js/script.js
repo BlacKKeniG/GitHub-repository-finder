@@ -1,7 +1,6 @@
 const getGitHubRepositoriesData = async (queryStr, perPage) => {
 	const queryString = 'q=' + encodeURIComponent(queryStr);
 	const url = `https://api.github.com/search/repositories?${queryString} in:name,topics,description,readme&per_page=${perPage}`
-	//const url = `https://api.github.com/search/repositories?${queryString}&per_page=${perPage}`
   
 	const response = await fetch(url)
 	if(!response.ok) {
@@ -31,12 +30,16 @@ const createArticleForFoundRepository = (parent, repository) => {
 	)
 }
 
-const submit = (inputQuery, perPage) => {
+form.onsubmit = event => {
+	const perPage = 10;
 
-	getGitHubRepositoriesData(inputQuery, perPage)
+	event.preventDefault();
+
+	if(document.querySelector("#responses")) responses.remove();
+	if(document.querySelector("#msg_nothing_found")) msg_nothing_found.remove();
+	
+	getGitHubRepositoriesData(form.query_input.value, perPage)
 	.then(foundRepositories => {
-
-		console.log(foundRepositories);
 
 		if(!foundRepositories.length) {
 
@@ -52,21 +55,12 @@ const submit = (inputQuery, perPage) => {
 		container.style.minHeight = "auto"
 		container.style.marginLeft = "0px"
 		
-		
 		form.insertAdjacentHTML("afterend", `<div id="responses"></div>`);
 		foundRepositories.forEach( repository => {
 			createArticleForFoundRepository(responses, repository);
 		});
 	}
 	);
-}
-
-form.onsubmit = event => {
-	event.preventDefault();
-
-	if(document.querySelector("#msg_nothing_found")) msg_nothing_found.remove();
-	if(document.querySelector("#responses")) responses.remove();
-
-	submit(form.query_input.value, 1000);
 };
 
+form_submit_icon.onclick = form.onsubmit;
