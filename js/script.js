@@ -32,9 +32,9 @@ const createArticleForFoundRepository = (parent, repository) => {
 }
 
 form.onsubmit = event => {
-	if(!form.query_input.value) return;
 	event.preventDefault();
 
+	if(!form.query_input.value) return;
 	
 	if(document.querySelector("#responses")) responses.remove();
 	if(document.querySelector("#msg_nothing_found")) msg_nothing_found.remove();
