@@ -33,22 +33,31 @@ const createArticleForFoundRepository = (parent, repository) => {
 
 form.onsubmit = event => {
 	event.preventDefault();
+	if(!form.query_input.value) {
+		return false;
+	}
 
-	if(!form.query_input.value) return;
-	
-	if(document.querySelector("#responses")) responses.remove();
-	if(document.querySelector("#msg_nothing_found")) msg_nothing_found.remove();
+	if(document.querySelector("#responses")) {
+		responses.remove();
+	} 
+
+	if(document.querySelector("#msg_nothing_found")) {
+		msg_nothing_found.remove();
+	} 
+		
 
 		getGitHubRepositoriesData(form.query_input.value)
 		.then(foundRepositories => {
 			
 			if(!foundRepositories.length) {
+
+				console.log(foundRepositories.length);
 				
 				container.style.margin = "0 auto"
 				container.style.paddingTop = "40vh"
 				
 				createMessageNothingFound(form);
-				return;
+				return false;
 			}
 			
 			container.style.marginLeft = "0px"
