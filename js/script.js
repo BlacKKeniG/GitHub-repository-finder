@@ -45,13 +45,10 @@ form.onsubmit = event => {
 		msg_nothing_found.remove();
 	} 
 		
-
 		getGitHubRepositoriesData(form.query_input.value)
 		.then(foundRepositories => {
 			
 			if(!foundRepositories.length) {
-
-				console.log(foundRepositories.length);
 				
 				container.style.margin = "0 auto"
 				container.style.paddingTop = "40vh"
