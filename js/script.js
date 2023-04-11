@@ -1,4 +1,4 @@
-const getGitHubRepositoriesData = async (queryStr, perPage = 10) => {
+const getGitHubRepositoriesData = async (queryStr, perPage = 100) => {
 
 	const url = `https://api.github.com/search/repositories?
 	q=${encodeURIComponent(queryStr)} in:name,topics,description,readme&per_page=${perPage}`;
